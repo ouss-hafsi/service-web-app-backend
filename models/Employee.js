@@ -18,9 +18,10 @@ const employeeSchema = new mongoose.Schema(
           unique: [true, "Email is in use"],
           required: [true, "Please provide an Email"],
         },
-
-        phonenumber: {type: Number, required:true},
-        pictureUrl: {type: String} 
+        category:{type: String},
+        phonenumber: {type: String, required:true},
+        pictureUrl: {type: String} ,
+        location:{type: String}
   
   },
   {
