@@ -39,7 +39,7 @@ router.get("/:id",requireToken ,async (req, res, next) => {
   }
 });
 
-// Searching for plant
+// Searching for Employee
 // router.get("/search/:name", async (req, res, next) => {
 //   try {
 //     const emploName = req.params.name
