@@ -76,19 +76,25 @@ router.post("/signup", async (req, res, next) => {
 });
 
 // Signing in
-router.post("/signin", (req, res, next) => {
-  User.findOne({ username: req.body.username })
-    .then((user) => createUserToken(req, user))
-    .then((token) => res.json({ token }))
-    .catch(next);
+router.post("/signin", async (req, res, next) => {
+
+
+  try {
+    const user = await User.findOne({ username: req.body.username  })
+    if (user) {
+        const token = createUserToken(req, user)
+        res.json({token})
+    }
+    else {
+        res.sendStatus(404)
+    }
+}
+catch(err) {
+    next(err)
+}
+  
 });
 
-// Logout
-// router.post('/logout', (req, res) => {
-//     req.session.destroy((err) => {
-//         if(err) throw err
-//         res.redirect('/')
-//     })
-// })
+
 
 module.exports = router;
