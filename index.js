@@ -31,6 +31,15 @@ const userController = require("./controllers/userController");
 app.use("/users", userController);
 
 
+
+// changes
+// const imageController = require("./controllers/imageController");
+// app.use("/images", imageController);
+
+
+
+
+
 app.use((err, req, res, next) => {
     const statusCode = res.statusCode || 500;
     const message = err.message || "Internal Server Error";

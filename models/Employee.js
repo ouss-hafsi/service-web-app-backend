@@ -21,6 +21,7 @@ const employeeSchema = new mongoose.Schema(
         category:{type: String},
         phonenumber: {type: String, required:true},
         pictureUrl: {type: String} ,
+        // imageKey:{type: String},
         location:{type: String}
   
   },

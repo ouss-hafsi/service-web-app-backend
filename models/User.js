@@ -1,21 +1,25 @@
 const mongoose = require("../db/connection");
+const { isEmail } = require('validator')
+
 
 const userSchema = new mongoose.Schema(
   {
       username: {
         type: String,
-        unique: [true, "Username is taken"],
+        required: true,
+        unique: true,
       },
     email: {
       type: String,
-      unique: [true, "Email is in use"],
-      required: [true, "Please provide an Email"],
+      unique: true,
+      required: true, 
+      validate: [isEmail, 'invalid email']
     },
    
     password: {
       type: String,
       minLength: 8,
-      required: [true, "Password is required"],
+      required: true,
     },
    
   },

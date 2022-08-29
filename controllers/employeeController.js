@@ -5,7 +5,7 @@ const { requireToken } = require('../middleware/auth');
 
 
 
-// const multer = require('multer')
+
 
 // const storage = multer.memoryStorage()
 // const upload = multer({storage:storage});
@@ -20,7 +20,7 @@ const { requireToken } = require('../middleware/auth');
 // Routes
 
 // All employees
-router.get("/",  requireToken ,async (req, res, next) => {
+router.get("/",requireToken, async (req, res, next) => {
   try {
     const employees = await Employee.find({});
     res.json(employees);
@@ -43,15 +43,15 @@ router.get("/:id",requireToken ,async (req, res, next) => {
 // router.get("/search/:name", async (req, res, next) => {
 //   try {
 //     const emploName = req.params.name
-//     const findPlant = await Plant.find({ name:{ $regex: plantName, $options:/i/ } })
-//     res.json(findPlant)
+//     const findEmp= await Plant.find({ name:{ $regex: emploName, $options:/i/ } })
+//     res.json(findEmp)
 //   } catch (err) {
 //     next(err);
 //   }
 // });
 
 // Post Employee
-router.post("/",requireToken ,async (req, res, next) => {
+router.post("/" ,async (req, res, next) => {
   try {
     const newEmployee = await Employee.create(req.body);
     res.json(newEmployee);

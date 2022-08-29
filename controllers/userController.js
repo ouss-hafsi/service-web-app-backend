@@ -61,15 +61,27 @@ router.delete("/:id", async (req, res, next) => {
 
 //Signing up
 router.post("/signup", async (req, res, next) => {
-  const { email, username} = req.body;
+
+
   try {
-    const password = await bcrypt.hash(req.body.password, 10);
-    const newUser = await User.create({
-      email,
-      username,
-      password,
-    });
-    return res.status(201).json(newUser);
+
+    // email validation
+    const emailCheck = await User.findOne({email: req.body.email})
+    if(emailCheck) return res.status(400).send('Email already exists')
+  
+    // user validation 
+    const userCheck = await User.findOne({username: req.body.username})
+    if(userCheck) return res.status(400).send('Username already exists')
+  
+    const { email, username} = req.body;
+  
+      const password = await bcrypt.hash(req.body.password, 10);
+      const newUser = await User.create({
+        email,
+        username,
+        password,
+      });
+      return res.status(201).json(newUser);
   } catch (error) {
     return next(error);
   }
@@ -77,8 +89,6 @@ router.post("/signup", async (req, res, next) => {
 
 // Signing in
 router.post("/signin", async (req, res, next) => {
-
-
   try {
     const user = await User.findOne({ username: req.body.username  })
     if (user) {
