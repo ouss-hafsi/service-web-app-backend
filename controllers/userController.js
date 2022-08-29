@@ -72,7 +72,7 @@ router.post("/signup", async (req, res, next) => {
     // user validation 
     const userCheck = await User.findOne({username: req.body.username})
     if(userCheck) return res.status(400).send('Username already exists')
-  
+    if (req.body.password.length < 8) return res.status(400).send('Password must be atleast 8 characters.')
     const { email, username} = req.body;
   
       const password = await bcrypt.hash(req.body.password, 10);
